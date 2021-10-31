@@ -1,10 +1,11 @@
 package ru.netology.domain;
 
 import org.junit.jupiter.api.Test;
+import ru.netology.manager.AfishaManager;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-class MovieTest {
+class AfishaAnyNumberFilmTest {
     Movie first = new Movie("фильм1", "картинка1", "Бладшот", "боевик");
     Movie second = new Movie("фильм2", "картинка2", "Вперед", "мультфильм");
     Movie third = new Movie("фильм3", "картинка3", "Отель белград", "комедия");
@@ -20,7 +21,7 @@ class MovieTest {
 
     @Test
     public void shouldAddFilmsMoreThan10() {
-        MovieManager manager = new MovieManager();
+        AfishaManager manager = new AfishaManager(9);
         manager.addFilm(first);
         manager.addFilm(second);
         manager.addFilm(third);
@@ -34,14 +35,14 @@ class MovieTest {
         manager.addFilm(eleventh);
         manager.addFilm(twelfth);
         Movie[] actual = manager.get10Last();
-        Movie[] expected = new Movie[]{twelfth, eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth,third};
+        Movie[] expected = new Movie[]{twelfth, eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth};
 
         assertArrayEquals(actual, expected);
     }
 
     @Test
     public void shouldAddFilmsLessThan10() {
-        MovieManager manager = new MovieManager();
+        AfishaManager manager = new AfishaManager(6);
         manager.addFilm(eighth);
         manager.addFilm(ninth);
         manager.addFilm(tenth);
@@ -55,7 +56,7 @@ class MovieTest {
 
     @Test
     public void shouldAddFilmsOne() {
-        MovieManager manager = new MovieManager();
+        AfishaManager manager = new AfishaManager(3);
         manager.addFilm(eighth);
 
         Movie[] actual = manager.get10Last();
@@ -66,7 +67,7 @@ class MovieTest {
 
     @Test
     public void shouldAddFilmsNull() {
-        MovieManager manager = new MovieManager();
+        AfishaManager manager = new AfishaManager(5);
         Movie[] actual = manager.get10Last();
         Movie[] expected = new Movie[0];
 

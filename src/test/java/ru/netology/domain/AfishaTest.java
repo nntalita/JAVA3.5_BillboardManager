@@ -1,10 +1,11 @@
 package ru.netology.domain;
 
 import org.junit.jupiter.api.Test;
+import ru.netology.manager.AfishaManager;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-class MovieAnyNumberFilmTest {
+class AfishaTest {
     Movie first = new Movie("фильм1", "картинка1", "Бладшот", "боевик");
     Movie second = new Movie("фильм2", "картинка2", "Вперед", "мультфильм");
     Movie third = new Movie("фильм3", "картинка3", "Отель белград", "комедия");
@@ -20,7 +21,7 @@ class MovieAnyNumberFilmTest {
 
     @Test
     public void shouldAddFilmsMoreThan10() {
-        MovieManager manager = new MovieManager(9);
+        AfishaManager manager = new AfishaManager();
         manager.addFilm(first);
         manager.addFilm(second);
         manager.addFilm(third);
@@ -34,14 +35,14 @@ class MovieAnyNumberFilmTest {
         manager.addFilm(eleventh);
         manager.addFilm(twelfth);
         Movie[] actual = manager.get10Last();
-        Movie[] expected = new Movie[]{twelfth, eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth};
+        Movie[] expected = new Movie[]{twelfth, eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth,third};
 
         assertArrayEquals(actual, expected);
     }
 
     @Test
     public void shouldAddFilmsLessThan10() {
-        MovieManager manager = new MovieManager(6);
+        AfishaManager manager = new AfishaManager();
         manager.addFilm(eighth);
         manager.addFilm(ninth);
         manager.addFilm(tenth);
@@ -55,7 +56,7 @@ class MovieAnyNumberFilmTest {
 
     @Test
     public void shouldAddFilmsOne() {
-        MovieManager manager = new MovieManager(3);
+        AfishaManager manager = new AfishaManager();
         manager.addFilm(eighth);
 
         Movie[] actual = manager.get10Last();
@@ -66,7 +67,7 @@ class MovieAnyNumberFilmTest {
 
     @Test
     public void shouldAddFilmsNull() {
-        MovieManager manager = new MovieManager(5);
+        AfishaManager manager = new AfishaManager();
         Movie[] actual = manager.get10Last();
         Movie[] expected = new Movie[0];
 

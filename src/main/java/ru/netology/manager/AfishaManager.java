@@ -1,14 +1,16 @@
-package ru.netology.domain;
+package ru.netology.manager;
 
 
-public class MovieManager {
+import ru.netology.domain.Movie;
+
+public class AfishaManager {
     private int numberLastFilms;
 
-    public MovieManager() {
+    public AfishaManager() {
         this.numberLastFilms = 10;
     }
 
-    public MovieManager(int numberLastFilms) {
+    public AfishaManager(int numberLastFilms) {
         this.numberLastFilms = numberLastFilms;
     }
 
