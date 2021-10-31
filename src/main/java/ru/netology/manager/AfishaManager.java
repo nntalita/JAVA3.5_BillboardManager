@@ -7,10 +7,10 @@ import ru.netology.repository.AfishaRepository;
 public class AfishaManager {
     private int numberLastFilms;
     private AfishaRepository repository = new AfishaRepository();// вместо следующей строки
-    // иначе NullPointerExeption
+    //    private AfishaRepository repository;
+    // (иначе NullPointerException)
 
-    //    private BillboardRepository repository;
-//
+
     public AfishaManager(AfishaRepository repository) {
         this.repository = repository;
     }
@@ -24,19 +24,12 @@ public class AfishaManager {
     }
 
 
-//    public Movie[] returnMovieByid(String id) {
-//
-//        Movie[] film = repository.findById(id);
-//        return film;
-//    }
-
     public void addFilm(Movie film) {
         repository.save(film);
-
     }
 
     public Movie[] getLast() {
-        Movie[] films = repository.findAll();
+        Movie[] films = repository.findAllR();
 
         int resultLength = numberLastFilms;
         if (resultLength > films.length) {
@@ -48,5 +41,19 @@ public class AfishaManager {
             result[i] = films[index];
         }
         return result;
+    }
+
+    public void removeById(String id) {
+        repository.removeById(id);
+    }
+
+    public void removeAll() {
+        repository.removeAll();
+    }
+
+    public Movie[] findById (String id){
+        Movie[] film;
+        film = repository.findById(id);
+        return film;
     }
 }

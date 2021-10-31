@@ -5,7 +5,7 @@ import ru.netology.domain.Movie;
 public class AfishaRepository {
     private Movie[] films = new Movie[0];
 
-    public Movie[] findAll() {
+    public Movie[] findAllR() {
         return films;
     }
 
@@ -20,19 +20,32 @@ public class AfishaRepository {
 
     }
 
-    //        findById - возвращает объект по идентификатору (либо null, если такого объекта нет)
-//    public Movie[] findById(String id) {
-//
-//        for (Movie film : films) {
-//            if (film.getId().equals(id)) {
-////                return new Movie[]{film};
-//                return films;
-//            }
-//
-//
-//        }
-//        Movie[] movies = null;
-//        return movies;
-//    }
 
+    public void removeById(String id) {
+        int length = films.length - 1;
+        Movie[] tmp = new Movie[length];
+        int index = 0;
+        for (Movie film : films) {
+            if (!film.getId().equals(id)) {
+                tmp[index] = film;
+                index++;
+            }
+        }
+        films = tmp;
+    }
+
+    public void removeAll() {
+        Movie[] tmp = new Movie[0];
+        films = tmp;
+    }
+
+    public Movie[] findById(String id) {
+
+        for (Movie film : films) {
+            if (film.getId().equals(id)) {
+                return new Movie[]{film};
+            }
+        }
+        return null;
+    }
 }

@@ -1,15 +1,15 @@
 package ru.netology.domain;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import ru.netology.manager.AfishaManager;
+import ru.netology.repository.AfishaRepository;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class AfishaTest {
-//    private BillboardRepository repository = Mockito.mock(BillboardRepository.class);
 
-//    private MovieManager manager = new MovieManager(repository);
-
+    AfishaManager manager = new AfishaManager();
     private Movie first = new Movie("фильм1", "картинка1", "Бладшот", "боевик");
     private Movie second = new Movie("фильм2", "картинка2", "Вперед", "мультфильм");
     private Movie third = new Movie("фильм3", "картинка3", "Отель  Пелград", "комедия");
@@ -24,34 +24,72 @@ class AfishaTest {
     private Movie twelfth = new Movie("фильм12", "картинка12", "Изчезнувший", "триллер");
 
 
-//    @Test
-//    public void shouldReturnMovieById() {
-//        AfishaManager manager = new AfishaManager();
-//        manager.addFilm(first);
-//        manager.addFilm(second);
-//        manager.addFilm(third);
-//        manager.addFilm(fourth);
-//        manager.addFilm(fifth);
-//        manager.addFilm(sixth);
-//        manager.addFilm(seventh);
-//        manager.addFilm(eighth);
-//        manager.addFilm(ninth);
-//        manager.addFilm(tenth);
-//        manager.addFilm(eleventh);
-//        manager.addFilm(twelfth);
-//
-//
-////
-//        Movie[] expected = manager.returnMovieByid("фильм2");
-//       Movie actual = second;
-//        assertArrayEquals(new Movie[][]{expected}, actual);
-//
-//    }
+    @Test
+    public void shouldRemoveById() {
+        manager.addFilm(first);
+        manager.addFilm(second);
+        manager.addFilm(third);
+        manager.addFilm(fourth);
+        manager.addFilm(fifth);
+        manager.addFilm(sixth);
+        manager.addFilm(seventh);
+        manager.addFilm(eighth);
+        manager.addFilm(ninth);
+        manager.addFilm(tenth);
+        manager.addFilm(eleventh);
+        manager.addFilm(twelfth);
+        manager.removeById("фильм6");
+        Movie[] actual = manager.getLast();
+        Movie[] expected = new Movie[]{twelfth, eleventh, tenth, ninth, eighth, seventh, fifth, fourth, third, second};
+        assertArrayEquals(actual, expected);
+    }
+
+
+    @Test
+    public void shouldRemoveAll() {
+        manager.addFilm(first);
+        manager.addFilm(second);
+        manager.addFilm(third);
+        manager.addFilm(fourth);
+        manager.addFilm(fifth);
+        manager.addFilm(sixth);
+        manager.addFilm(seventh);
+        manager.addFilm(eighth);
+        manager.addFilm(ninth);
+        manager.addFilm(tenth);
+        manager.addFilm(eleventh);
+        manager.addFilm(twelfth);
+        manager.removeAll();
+        Movie[] actual = manager.getLast();
+        Movie[] expected = new Movie[0];
+        assertArrayEquals(actual, expected);
+    }
+
+    @Test
+    public void shouldReturnMovieById() {
+
+        manager.addFilm(first);
+        manager.addFilm(second);
+        manager.addFilm(third);
+        manager.addFilm(fourth);
+        manager.addFilm(fifth);
+        manager.addFilm(sixth);
+        manager.addFilm(seventh);
+        manager.addFilm(eighth);
+        manager.addFilm(ninth);
+        manager.addFilm(tenth);
+        manager.addFilm(eleventh);
+        manager.addFilm(twelfth);
+
+        Movie[] expected = manager.findById("фильм12");
+        Movie[] actual = new Movie[]{twelfth};
+        assertArrayEquals(actual, expected);
+
+    }
 
 
     @Test
     public void shouldAddFilmsMoreThan10() {
-        AfishaManager manager = new AfishaManager();
 
         manager.addFilm(first);
         manager.addFilm(second);
@@ -73,7 +111,7 @@ class AfishaTest {
 
     @Test
     public void shouldAddFilmsLessThan10() {
-        AfishaManager manager = new AfishaManager();
+
         manager.addFilm(eighth);
         manager.addFilm(ninth);
         manager.addFilm(tenth);
@@ -87,7 +125,7 @@ class AfishaTest {
 
     @Test
     public void shouldAddFilmsOne() {
-        AfishaManager manager = new AfishaManager();
+
         manager.addFilm(eighth);
 
         Movie[] actual = manager.getLast();
@@ -98,7 +136,7 @@ class AfishaTest {
 
     @Test
     public void shouldAddFilmsNull() {
-        AfishaManager manager = new AfishaManager();
+
         Movie[] actual = manager.getLast();
         Movie[] expected = new Movie[0];
 
